@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/master_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h3><i class="far fa-clipboard"></i> Position Registration</h3>
+
+    <form action="#" class="mt-5" th:action="@{'/editPosition/' + ${position.id}}" th:object="${position}" method="post">
+        <div class="form-group">
+            <label for="name">Position Title</label>
+            <small th:if="${#fields.errors('name')}" class="form-text text-danger" th:errors="*{name}"></small>
+            <input type="text" class="form-control" id="name" placeholder="Eg. JAT" th:field="*{name}">
+        </div>
+        <div class="form-group">
+            <label for="salary">Salary per Month</label>
+            <small th:if="${#fields.errors('salary')}" class="form-text text-danger" th:errors="*{salary}"></small>
+            <input type="number" class="form-control" id="salary" placeholder="Eg. 70000" th:field="*{salary}">
+        </div>
+        <button type="submit" class="btn btn-outline-success btn-block mt-3"><i class="far fa-save"></i> Save</button>
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/master_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h3><i class="far fa-clipboard"></i> Teacher Registration</h3>
+
+    <form action="#" class="mt-5" th:action="@{/registerTeacher}" th:object="${teacher}" method="post">
+
+        <div class="form-group form-row">
+            <div class="col">
+                <label for="name">Teacher Name</label>
+                <small th:if="${#fields.errors('name')}" class="form-text text-danger" th:errors="*{name}"></small>
+                <input type="text" class="form-control" id="name" placeholder="U Kyaw Shwe" th:field="*{name}">
+            </div>
+            <div class="col">
+                <label for="nrcNo">NRC Number</label>
+                <small th:if="${#fields.errors('personalInfo.nrcNo')}" class="form-text text-danger" th:errors="*{personalInfo.nrcNo}"></small>
+                <input type="text" class="form-control" id="nrcNo" placeholder="12/SOP(N)111222" th:field="*{personalInfo.nrcNo}">
+            </div>
+        </div>
+
+        <div class="form-group form-row">
+            <div class="col">
+                <label for="name">Date of Birth</label>
+                <small th:if="${#fields.errors('personalInfo.dob')}" class="form-text text-danger" th:errors="*{personalInfo.dob}"></small>
+                <input type="date" class="form-control" id="dob" placeholder="Eg. JAT" th:field="*{personalInfo.dob}">
+            </div>
+            <div class="col">
+                <label for="position">Job Title</label>
+                <small th:if="${#fields.errors('position.name')}" class="form-text text-danger" th:errors="*{position.name}"></small>
+                <select class="form-control" name="" id="position" th:field="*{position}">
+                    <option th:each="pos : ${positions}" th:value="${pos.id}" th:text="${pos.name}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group form-row">
+            <div class="col">
+                <label for="fatherName">Father Name</label>
+                <small th:if="${#fields.errors('personalInfo.fatherName')}" class="form-text text-danger" th:errors="*{personalInfo.fatherName}"></small>
+                <input type="text" class="form-control" id="fatherName" placeholder="U Mg Mg Myint" th:field="*{personalInfo.fatherName}">
+            </div>
+            <div class="col">
+                <label for="phoneNo">Phone Number</label>
+                <small th:if="${#fields.errors('personalInfo.phoneNo')}" class="form-text text-danger" th:errors="*{personalInfo.phoneNo}"></small>
+                <input type="text" class="form-control" id="phoneNo" placeholder="09 11 222 333" th:field="*{personalInfo.phoneNo}">
+            </div>
+        </div>
+        
+        <div class="form-group form-row">
+            <div class="col">
+                <label for="address">Address</label>
+                <small th:if="${#fields.errors('personalInfo.address')}" class="form-text text-danger" th:errors="*{personalInfo.address}"></small>
+                <textarea name="" id="address" class="form-control" th:field="*{personalInfo.address}" placeholder="Your Address..."></textarea>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <label for="classroom">Classrooms</label>
+                    <select class="form-control" name="" id="classroom" th:field="*{classrooms}" multiple>
+                        <option th:each="c : ${classrooms}" th:value="${c.id}" th:text="${c.name}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-success btn-block mt-3"><i class="far fa-save"></i> Save</button>
+
+    </form>
+
+</div>
+</body>
+</html>

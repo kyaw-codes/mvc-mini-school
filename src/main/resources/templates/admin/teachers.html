@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/master_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="table-responsive-sm">
+        <h3 class="mb-3">Teacher List</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>DOB</th>
+                <th>NRC No</th>
+                <th>Father's Name</th>
+                <th>Phone Number</th>
+                <th>Job Title</th>
+                <th>Classes</th>
+                <th>Address</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody th:if="${#lists.isEmpty(teachers)}">
+            <tr>
+                <td colspan="2">No Teacher Found</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr th:each="tr : ${teachers}">
+                <td th:text="${tr.name}"></td>
+                <td th:text="${tr.getPersonalInfo().dob}"></td>
+                <td th:text="${tr.getPersonalInfo().nrcNo}"></td>
+                <td th:text="${tr.getPersonalInfo().fatherName}"></td>
+                <td th:text="${tr.getPersonalInfo().phoneNo}"></td>
+                <td th:text="${tr.getPosition().name}"></td>
+                <td th:text="${tr.getClassrooms()}"></td>
+                <td th:text="${tr.getPersonalInfo().address}"></td>
+                <td>
+                    <a href="#" th:href="@{'/admin/editTeacher/' + ${tr.id}}" class="btn btn-outline-secondary btn-block btn-sm">
+                        <i class="far fa-edit"></i> Edit
+                    </a>
+                </td>
+                <td>
+                    <a href="#" th:href="'/admin/deleteTeacher/' + ${tr.id}" class="btn btn-outline-dark btn-block btn-sm">
+                        <i class="far fa-trash-alt"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="#" th:href="@{/admin/registerTeacher}" class="btn btn-outline-success">
+        <i class="fas fa-plus"></i> Add New
+    </a>
+</div>
+</body>
+</html>

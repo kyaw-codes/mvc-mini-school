@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/master_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="table-responsive">
+        <h3 class="mb-3">Employee's Position List</h3>
+        <div th:if="${update}">
+            <p class="alert alert-success">A row has been updated successfully!</p>
+        </div>
+        <div th:if="${delete}">
+            <p class="alert alert-success">A row has been removed successfully!</p>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Position Title</th>
+                <th>Salary per Month</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody th:if="${#lists.isEmpty(positions)}">
+            <tr>
+                <td colspan="2">No Data Found</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr th:each="pos : ${positions}">
+                <td th:text="${pos.name}"></td>
+                <td th:text="${pos.salary + ' Ks'}"></td>
+                <td>
+                    <a href="#" th:href="@{'/admin/editPosition/' + ${pos.id}}" class="btn btn-outline-secondary btn-block btn-sm">
+                        <i class="far fa-edit"></i> Edit
+                    </a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{'/admin/deletePosition/' + ${pos.id}}" class="btn btn-outline-dark btn-block btn-sm">
+                        <i class="far fa-trash-alt"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="#" th:href="@{/admin/registerPosition}" class="btn btn-outline-success"><i
+            class="fas fa-plus"></i> Add New</a>
+</div>
+</body>
+</html>

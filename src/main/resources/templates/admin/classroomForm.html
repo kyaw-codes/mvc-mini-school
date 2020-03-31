@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/master_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h3><i class="far fa-clipboard"></i> Classroom Registration</h3>
+
+    <form action="#" class="mt-5" th:action="@{/registerClassroom}" th:object="${classroom}" method="post">
+        <div class="form-group">
+            <label for="name">Class Name</label>
+            <small th:if="${#fields.errors('name')}" class="form-text text-danger" th:errors="*{name}"></small>
+            <input type="text" class="form-control" id="name" placeholder="Eg. Grade One" th:field="*{name}">
+        </div>
+        <button type="submit" class="btn btn-outline-success btn-block mt-3"><i class="far fa-save"></i> Save</button>
+    </form>
+
+</div>
+</body>
+</html>

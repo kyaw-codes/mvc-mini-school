@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/master_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="table-responsive">
+        <h3 class="mb-3">Classroom List</h3>
+        <div th:if="${update}">
+            <p class="alert alert-success">A row has been updated successfully!</p>
+        </div>
+        <div th:if="${delete}">
+            <p class="alert alert-secondary">A row has been removed successfully!</p>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Classroom Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody th:if="${#lists.isEmpty(classrooms)}">
+            <tr>
+                <td colspan="2">No Classroom Found</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr th:each="class : ${classrooms}">
+                <td th:text="${class.name}"></td>
+                <td>
+                    <a href="#" th:href="@{'/admin/editClassroom/' + ${class.id}}"
+                       class="btn btn-outline-secondary btn-block btn-sm">
+                        <i class="far fa-edit"></i> Edit
+                    </a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{'/admin/deleteClassroom/' + ${class.id}}"
+                       class="btn btn-outline-dark btn-block btn-sm">
+                        <i class="far fa-trash-alt"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="#" th:href="@{/admin/registerClassroom}" class="btn btn-outline-success"><i
+            class="fas fa-plus"></i> Add New</a>
+</div>
+</body>
+</html>
